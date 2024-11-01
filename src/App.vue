@@ -1,21 +1,21 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
-import HelloWorld from '~/components/HelloWorld.vue';
 import logoPath from '~/assets/logo.svg';
 </script>
 
 <template>
   <header>
-    <img class="logo" :src="logoPath" alt="Vue logo" height="125" width="125" />
+    <div class="logo">
+      <img :src="logoPath" alt="Vue logo" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+      <h1 class="green">GoTo</h1>
     </div>
+
+    <nav>
+      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/potato" exact>Potato 🥔</RouterLink>
+      <RouterLink to="/tomato" exact>Tomato 🍅</RouterLink>
+    </nav>
   </header>
 
   <RouterView />
@@ -23,20 +23,34 @@ import logoPath from '~/assets/logo.svg';
 
 <style scoped>
 header {
-  line-height: 1.5;
   max-height: 100vh;
 }
 
 .logo {
-  display: block;
-  margin: 0 auto 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo img {
+  rotate: -90deg;
+  height: 80px;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+}
+
+.logo h1 {
+  font-size: 80px;
+  font-weight: 700;
+  scale: 1.1;
 }
 
 nav {
   width: 100%;
+  margin-top: 2rem;
   font-size: 12px;
   text-align: center;
-  margin-top: 2rem;
 }
 
 nav a.router-link-exact-active {
@@ -60,27 +74,31 @@ nav a:first-of-type {
 @media (min-width: 1024px) {
   header {
     display: flex;
-    place-items: center;
+    flex-direction: column;
+    justify-content: center;
     padding-right: calc(var(--section-gap) / 2);
   }
 
   .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 
   nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
 
-    padding: 1rem 0;
     margin-top: 1rem;
+    margin-left: 94px;
+    border-left: 1px solid var(--color-border);
+    padding-right: 4rem;
+
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  nav a {
+    border: 0;
+    padding: 0.5rem 1rem;
   }
 }
 </style>
