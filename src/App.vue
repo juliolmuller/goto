@@ -12,13 +12,17 @@ import logoPath from '~/assets/logo.svg';
     </div>
 
     <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/potato" exact>Potato 🥔</RouterLink>
-      <RouterLink to="/tomato" exact>Tomato 🍅</RouterLink>
+      <router-link to="/">Home</router-link>
+      <router-link to="/potato" exact>Potato 🥔</router-link>
+      <router-link to="/tomato" exact>Tomato 🍅</router-link>
     </nav>
   </header>
 
-  <RouterView />
+  <router-view v-slot="{ Component, route }">
+    <transition mode="out-in" name="slide-fade">
+      <component :is="Component" :key="route.path" />
+    </transition>
+  </router-view>
 </template>
 
 <style scoped>
