@@ -27,10 +27,18 @@ import logoPath from '~/assets/logo.svg';
   </main>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 header {
   max-height: 100vh;
   border-right: 0 solid var(--color-border);
+
+  @media (min-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right-width: 1px;
+    padding-right: calc(var(--section-gap) / 2);
+  }
 }
 
 .logo {
@@ -38,19 +46,23 @@ header {
   justify-content: center;
   align-items: center;
   gap: 1rem;
-}
 
-.logo img {
-  rotate: -90deg;
-  height: 80px;
-  aspect-ratio: 1/1;
-  object-fit: contain;
-}
+  @media (min-width: 1024px) {
+    justify-content: flex-start;
+  }
 
-.logo h1 {
-  font-size: 80px;
-  font-weight: 700;
-  scale: 1.1;
+  img {
+    rotate: -90deg;
+    height: 80px;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+  }
+
+  h1 {
+    font-size: 80px;
+    font-weight: 700;
+    scale: 1.1;
+  }
 }
 
 nav {
@@ -58,45 +70,8 @@ nav {
   margin-top: 2rem;
   font-size: 12px;
   text-align: center;
-}
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-main {
-  padding-right: calc(var(--section-gap) / 4);
-  padding-left: calc(var(--section-gap) / 4);
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-right-width: 1px;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    justify-content: flex-start;
-  }
-
-  nav {
+  @media (min-width: 1024px) {
     display: flex;
     flex-direction: column;
 
@@ -109,9 +84,32 @@ main {
     text-align: left;
   }
 
-  nav a {
-    border: 0;
-    padding: 0.5rem 1rem;
+  a {
+    display: inline-block;
+    padding: 0 1rem;
+    border-left: 1px solid var(--color-border);
+
+    @media (min-width: 1024px) {
+      border: 0;
+      padding: 0.5rem 1rem;
+    }
+
+    &:first-of-type {
+      border: 0;
+    }
+
+    &.router-link-exact-active {
+      color: var(--color-text);
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
   }
+}
+
+main {
+  padding-right: calc(var(--section-gap) / 4);
+  padding-left: calc(var(--section-gap) / 4);
 }
 </style>

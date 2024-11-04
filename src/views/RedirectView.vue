@@ -7,7 +7,7 @@ defineProps<RedirectViewProps>();
 </script>
 
 <template>
-  <div class="redirect">
+  <div id="redirect">
     <h1>💩</h1>
 
     <p>
@@ -19,8 +19,8 @@ defineProps<RedirectViewProps>();
   </div>
 </template>
 
-<style scoped>
-.redirect {
+<style scoped lang="scss">
+#redirect {
   flex: 1;
   display: flex;
   flex-direction: column;

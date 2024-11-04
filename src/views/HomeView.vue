@@ -1,5 +1,11 @@
 <script setup lang="ts"></script>
 
 <template>
-  <h1>Hello, there!</h1>
+  <div id="home">
+    <input type="search" />
+  </div>
 </template>
+
+<style scoped lang="scss">
+#home {}
+</style>
