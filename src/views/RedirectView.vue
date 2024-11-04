@@ -26,6 +26,7 @@ defineProps<RedirectViewProps>();
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-left: 0 solid var(--color-border);
 }
 
 h1 {
@@ -49,6 +50,12 @@ a {
 
   &:hover {
     border-color: transparent;
+  }
+}
+
+@media (min-width: 1024px) {
+  .redirect {
+    border-left-width: 1px;
   }
 }
 </style>
