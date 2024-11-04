@@ -35,12 +35,13 @@ a,
   body {
     display: flex;
     flex-direction: row;
-    place-items: center;
+    align-items: start;
+    justify-content: center;
   }
 
   #app {
     display: grid;
     grid-template-columns: 400px calc(100vw - 12rem - 400px);
-    padding: 0 2rem;
+    padding: 4rem 2rem;
   }
 }
