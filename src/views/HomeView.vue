@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+import ViewHeader from '~/components/ViewHeader.vue';
 
 const searchText = ref('');
 const baseShortcutsList = ref([
@@ -53,13 +54,11 @@ const shortcutsList = computed(() => {
 
 <template>
   <div id="home">
-    <header>
-      <h1>Atalhos Populares</h1>
-
-      <input type="search" autofocus placeholder="Buscar atalhos..." v-model="searchText" />
-    </header>
-
-    <hr />
+    <view-header
+      title="Atalhos Populares"
+      search-placeholder="Buscar atalhos..."
+      v-model="searchText"
+    />
 
     <transition mode="out-in" name="slide-fade">
       <div v-if="!shortcutsList.length && isSearching">
@@ -79,39 +78,7 @@ const shortcutsList = computed(() => {
 </template>
 
 <style scoped lang="scss">
-#home {}
-
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-
-  input {
-    transition: border-color 400ms;
-
-    border: 1px solid var(--color-border);
-    border-radius: 1rem;
-    background: transparent;
-    padding: 0.5rem 0.75rem;
-
-    color: var(--color-text);
-
-    &:focus {
-      border-color: var(--color-text);
-    }
-
-    &::placeholder {
-      opacity: 0.5;
-      color: var(--color-text);
-    }
-  }
-}
-
-hr {
-  border: 0;
-  border-bottom: 1px solid var(--color-border);
-  margin: 1rem 0;
+#home {
 }
 
 ul {
