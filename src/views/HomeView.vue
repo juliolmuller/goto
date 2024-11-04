@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+import ShortcutListItem from '~/components/ShortcutListItem.vue';
 import ViewHeader from '~/components/ViewHeader.vue';
 
 const searchText = ref('');
@@ -7,32 +8,33 @@ const baseShortcutsList = ref([
   {
     name: 'julio',
     description: 'Portfólio do Júlio.',
-    url: 'https://juliolmuller.github.io',
+    href: 'https://juliolmuller.github.io',
+    icon: 'https://github.com/juliolmuller.png',
   },
   {
     name: 'google',
     description: 'Site de busca marota.',
-    url: 'https://google.com',
+    href: 'https://google.com',
   },
   {
     name: 'github',
     description: 'Repositórios Git.',
-    url: 'https://github.com/ResultadosDigitais',
+    href: 'https://github.com/ResultadosDigitais',
   },
   {
     name: 'gitlab',
     description: 'Repositórios Git.',
-    url: 'https://repo.tallos.com.br/',
+    href: 'https://repo.tallos.com.br/',
   },
   {
     name: 'oraculo',
     description: 'Repositório de documentações da RD.',
-    url: 'https://oraculo.rdstation.com.br/',
+    href: 'https://oraculo.rdstation.com.br/',
   },
   {
     name: 'rdu',
     description: 'Universidade dos RDoers.',
-    url: 'https://university.rdstation.com/',
+    href: 'https://university.rdstation.com/',
   },
 ]);
 
@@ -44,7 +46,7 @@ const shortcutsList = computed(() => {
   if (!isSearching.value) return baseShortcutsList.value;
 
   const pattern = new RegExp(searchText.value, 'i');
-  const searchableFields = ['name', 'description', 'url'] as const;
+  const searchableFields = ['href', 'name', 'description'] as const;
 
   return baseShortcutsList.value.filter((item) => {
     return searchableFields.some((field) => item[field]?.match(pattern));
@@ -67,10 +69,14 @@ const shortcutsList = computed(() => {
       <div v-else-if="!shortcutsList.length">Has no items.</div>
       <div v-else>
         <transition-group tag="ul" name="list" appear>
-          <li v-for="shortcut in shortcutsList" :key="shortcut.name">
-            <a :href="shortcut.url" target="_blank">goto/{{ shortcut.name }}</a>
-            <p>{{ shortcut.description }}</p>
-          </li>
+          <shortcut-list-item
+            v-for="shortcut in shortcutsList"
+            :key="shortcut.name"
+            :href="shortcut.href"
+            :name="shortcut.name"
+            :description="shortcut.description"
+            :icon="shortcut.icon"
+          />
         </transition-group>
       </div>
     </transition>
