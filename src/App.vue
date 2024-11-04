@@ -18,16 +18,19 @@ import logoPath from '~/assets/logo.svg';
     </nav>
   </header>
 
-  <router-view v-slot="{ Component, route }">
-    <transition mode="out-in" name="slide-fade">
-      <component :is="Component" :key="route.path" />
-    </transition>
-  </router-view>
+  <main>
+    <router-view v-slot="{ Component, route }">
+      <transition mode="out-in" name="slide-fade">
+        <component :is="Component" :key="route.path" />
+      </transition>
+    </router-view>
+  </main>
 </template>
 
 <style scoped>
 header {
   max-height: 100vh;
+  border-right: 0 solid var(--color-border);
 }
 
 .logo {
@@ -75,11 +78,17 @@ nav a:first-of-type {
   border: 0;
 }
 
+main {
+  padding-right: calc(var(--section-gap) / 4);
+  padding-left: calc(var(--section-gap) / 4);
+}
+
 @media (min-width: 1024px) {
   header {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border-right-width: 1px;
     padding-right: calc(var(--section-gap) / 2);
   }
 
