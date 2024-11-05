@@ -15,7 +15,9 @@ defineProps<RedirectViewProps>();
       nenhum.
     </p>
 
-    <RouterLink to="/">Criar Atalho</RouterLink>
+    <RouterLink :to="{ name: 'user', query: { name: target } }">
+      Criar Atalho
+    </RouterLink>
   </div>
 </template>
 

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+import { useRoute } from 'vue-router';
 import ShortcutListItem from '~/components/ShortcutListItem.vue';
 import ViewHeader from '~/components/ViewHeader.vue';
 
@@ -13,7 +14,11 @@ const EMPTY_FORM: ShortcutFormData = {
   href: '',
 };
 
-const form = ref({ ...EMPTY_FORM });
+const route = useRoute();
+const nameInQuery = route.query.name;
+const nameInitial = Array.isArray(nameInQuery) ? nameInQuery[0] : nameInQuery;
+
+const form = ref({ ...EMPTY_FORM, name: nameInitial });
 const submitButtonRef = ref<HTMLButtonElement>();
 const searchText = ref('');
 const baseShortcutsList = ref([
