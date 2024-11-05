@@ -6,6 +6,7 @@ export type Shortcut = {
   href: string;
   description?: string;
   icon?: string;
+  visits?: number;
   users: ShortcutUser[];
 };
 
@@ -71,6 +72,7 @@ async function saveShortcut(shortcut: Omit<Shortcut, 'users'>) {
   // TODO: bind to user auth
   const actualShortcut: Shortcut = {
     ...shortcut,
+    visits: shortcut.visits ?? 0,
     users: [DEFAULT_USER],
   };
 
@@ -80,7 +82,12 @@ async function saveShortcut(shortcut: Omit<Shortcut, 'users'>) {
 
   if (shortcutIndex >= 0) {
     allShortcuts.value[shortcutIndex] = actualShortcut;
-    allShortcuts.value = [...allShortcuts.value];
+    allShortcuts.value = [...allShortcuts.value].sort((a, b) => {
+      const visitsInA = a.visits ?? 0;
+      const visitsInB = b.visits ?? 0;
+
+      return visitsInA - visitsInB;
+    });
   } else {
     allShortcuts.value = [...allShortcuts.value, actualShortcut];
   }

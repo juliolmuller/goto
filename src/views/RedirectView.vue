@@ -1,9 +1,22 @@
 <script setup lang="ts">
+import { useShortcuts } from '~/store/shortcuts';
+
 type RedirectViewProps = {
   target: string;
 };
 
-defineProps<RedirectViewProps>();
+const props = defineProps<RedirectViewProps>();
+
+const { allShortcuts, saveShortcut } = useShortcuts();
+
+for (const shortcut of allShortcuts.value) {
+  if (shortcut.name === props.target) {
+    shortcut.visits = (shortcut.visits ?? 0) + 1;
+    saveShortcut(shortcut).then(() => {
+      location.replace(shortcut.href);
+    });
+  }
+}
 </script>
 
 <template>

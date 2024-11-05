@@ -14,8 +14,6 @@ import logoPath from '~/assets/logo.svg';
     <nav>
       <router-link to="/">Home</router-link>
       <router-link to="/mine">Meus Atalhos</router-link>
-      <router-link to="/potato" exact>Potato 🥔</router-link>
-      <router-link to="/tomato" exact>Tomato 🍅</router-link>
     </nav>
   </header>
 
