@@ -45,6 +45,7 @@ a {
   border-radius: 4px;
   padding: 0.5rem 1rem;
 
+  color: var(--color-main);
   font-weight: 700;
 
   &:hover {
