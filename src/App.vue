@@ -29,6 +29,7 @@ import logoPath from '~/assets/logo.svg';
 <style scoped lang="scss">
 header {
   max-height: 100vh;
+  margin-bottom: 2rem;
   border-right: 0 solid var(--color-border);
 
   @media (min-width: 1024px) {

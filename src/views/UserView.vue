@@ -69,8 +69,8 @@ function handleTextAreaEnter() {
 
       <div class="form-shortcut-href">
         <textarea
-          placeholder="URL para onde este atalho redireciona
-(por exemplo: https://sites.google.com/rdstation.com/total-rewards)"
+          placeholder='URL para onde este atalho redireciona
+(por exemplo: "https://rdstation.com")'
           rows="3"
           v-model="form.href"
           @keydown.enter.prevent="handleTextAreaEnter"
