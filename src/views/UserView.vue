@@ -3,6 +3,7 @@ import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import ShortcutListItem from '~/components/ShortcutListItem.vue';
 import ViewHeader from '~/components/ViewHeader.vue';
+import { useShortcuts } from '~/store/shortcuts';
 
 type ShortcutFormData = {
   name: string;
@@ -18,42 +19,10 @@ const route = useRoute();
 const nameInQuery = route.query.name;
 const nameInitial = Array.isArray(nameInQuery) ? nameInQuery[0] : nameInQuery;
 
-const form = ref({ ...EMPTY_FORM, name: nameInitial });
+const form = ref({ ...EMPTY_FORM, name: nameInitial || '' });
 const submitButtonRef = ref<HTMLButtonElement>();
 const searchText = ref('');
-const baseShortcutsList = ref([
-  {
-    name: 'julio',
-    description: 'Portfólio do Júlio.',
-    href: 'https://juliolmuller.github.io',
-    icon: 'https://github.com/juliolmuller.png',
-  },
-  {
-    name: 'google',
-    description: 'Site de busca marota.',
-    href: 'https://google.com',
-  },
-  {
-    name: 'github',
-    description: 'Repositórios Git.',
-    href: 'https://github.com/ResultadosDigitais',
-  },
-  {
-    name: 'gitlab',
-    description: 'Repositórios Git.',
-    href: 'https://repo.tallos.com.br/',
-  },
-  {
-    name: 'oraculo',
-    description: 'Repositório de documentações da RD.',
-    href: 'https://oraculo.rdstation.com.br/',
-  },
-  {
-    name: 'rdu',
-    description: 'Universidade dos RDoers.',
-    href: 'https://university.rdstation.com/',
-  },
-]);
+const { userShortcuts: baseShortcutsList, saveShortcut } = useShortcuts();
 
 const isFormValid = computed(() => {
   return Boolean(form.value.name && form.value.href);
@@ -74,8 +43,8 @@ const shortcutsList = computed(() => {
   });
 });
 
-function createShortcut() {
-  alert(JSON.stringify(form.value, null, 4));
+async function createShortcut() {
+  saveShortcut(form.value);
   form.value = { ...EMPTY_FORM };
 }
 
