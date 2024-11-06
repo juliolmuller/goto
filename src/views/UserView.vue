@@ -98,6 +98,8 @@ function handleTextAreaEnter() {
           <shortcut-list-item
             v-for="shortcut in shortcutsList"
             :key="shortcut.name"
+            can-delete
+            can-edit
             :href="shortcut.href"
             :name="shortcut.name"
             :description="shortcut.description"
@@ -236,6 +238,8 @@ form {
 }
 
 ul {
+  padding: 0;
+
   li {
     margin-top: 1rem;
   }
